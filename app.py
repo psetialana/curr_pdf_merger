@@ -52,7 +52,7 @@ def merge(sheet_id, lang):
         pdfFile = open('storage/'+lang+'/'+sheet_id+'/'+filename, 'rb')
         pdfReader = PyPDF2.PdfReader(pdfFile)
         pdfMerge.append(pdfReader)
-    pdfFile.close()
+        pdfFile.close()
     pdfMerge.write('storage/'+lang+'/'+sheet_id+'.pdf')
     shutil.rmtree('storage/'+lang+'/'+sheet_id)
 
