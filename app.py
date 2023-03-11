@@ -20,19 +20,26 @@ def index():
                 if not os.path.exists(dirName):
                     os.makedirs(dirName)
             input = data.get('input')
-            input = str.split(',')
-            for i in range(1, len(input)):
-                if input[i] != '':
-                    input[i] = input[i].replace("https://drive.google.com/file/d/", "")
-                    input[i] = input[i].replace("/view?usp=drivesdk", "")
-                    output = gdown.download(id=input[i], output=sheet_id+'_'+str(i)+'.pdf', quiet=False)
-                    if (output != ''):
-                        shutil.move(output, "storage/"+lang+"/"+sheet_id+"/"+output)
-            merge(sheet_id, lang)
-            data = {
-                "url" : request.base_url + 'dl/' + lang + '/' + sheet_id + '.pdf'
-            }
-            return jsonify(data)
+            input = input.split(',')
+            if input:
+                for i in input:
+                    if i != '':
+                        i = i.replace("https://drive.google.com/file/d/", "")
+                        i = i.replace("/view?usp=drivesdk", "")
+                        i = i.replace(" ", "")
+                        output = gdown.download(id=i, output=sheet_id+'_'+str(i)+'.pdf', quiet=False)
+                        if (output != ''):
+                            shutil.move(output, "storage/"+lang+"/"+sheet_id+"/"+output)
+                merge(sheet_id, lang)
+                data = {
+                    "url" : request.base_url + 'dl/' + lang + '/' + sheet_id + '.pdf'
+                }
+                return jsonify(data)
+            else:
+                data = {
+                    "error" : "empty array"
+                }
+                return jsonify(data)
         else:
             data = {
                 "error" : "not json data"
