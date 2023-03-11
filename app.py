@@ -16,7 +16,7 @@ def index():
                 lang = 'id'
             sheet_id = data.get('sheet_id')
             if sheet_id != '':
-                dirName = 'storage/'+lang+'/'+sheet_id
+                dirName = 'storage/'+lang+'/'+str(sheet_id)
                 if not os.path.exists(dirName):
                     os.makedirs(dirName)
             input = data.get('input')
