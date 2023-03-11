@@ -18,7 +18,7 @@ def index():
             if sheet_id != '':
                 dirName = 'storage/'+lang+'/'+sheet_id
                 if not os.path.exists(dirName):
-                    os.mkdir(dirName)
+                    os.makedirs(dirName)
             input = data.get('input')
             input = str.split(',')
             for i in range(1, len(input)):
