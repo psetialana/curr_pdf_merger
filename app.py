@@ -23,14 +23,16 @@ def index():
             input = data.get('input')
             input = input.split(',')
             if input:
+                j = 1
                 for i in input:
                     if i != '':
                         i = i.replace("https://drive.google.com/file/d/", "")
                         i = i.replace("/view?usp=drivesdk", "")
                         i = i.replace(" ", "")
-                        output = gdown.download(id=i, output=sheet_id+'_'+str(i)+'.pdf', quiet=False)
+                        output = gdown.download(id=i, output=sheet_id+'_'+str(j)+'.pdf', quiet=False)
                         if (output != ''):
                             shutil.move(output, "storage/"+lang+"/"+sheet_id+"/"+output)
+                        j+=1
                 merge(sheet_id, lang)
                 data = {
                     "url" : request.base_url + 'dl/' + lang + '/' + sheet_id + '.pdf'
