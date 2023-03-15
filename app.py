@@ -30,9 +30,9 @@ def index():
                         i = i.replace("https://drive.google.com/file/d/", "")
                         i = i.replace("/view?usp=drivesdk", "")
                         i = i.replace(" ", "")
-                        output = gdown.download(id=i, output=sheet_id+'_'+str(j)+'.pdf', quiet=False)
+                        output = gdown.download(id=i, output=sheet_id+'_'+str(j)+'.pdf', use_cookies=False, quiet=False)
                         output = str(output)
-                        if (output != ''):
+                        if (output is not None):
                             shutil.move(output, "storage/"+lang+"/"+sheet_id+"/"+output)
                         j+=1
                 merge(sheet_id, lang)
