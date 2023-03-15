@@ -31,6 +31,7 @@ def index():
                         i = i.replace("/view?usp=drivesdk", "")
                         i = i.replace(" ", "")
                         output = gdown.download(id=i, output=sheet_id+'_'+str(j)+'.pdf', quiet=False)
+                        output = str(output)
                         if (output != ''):
                             shutil.move(output, "storage/"+lang+"/"+sheet_id+"/"+output)
                         j+=1
