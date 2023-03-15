@@ -12,6 +12,7 @@ def index():
         if request.is_json:
             data = request.json
             lang = data.get('lang')
+            lang = str(lang)
             if lang == '':
                 lang = 'id'
             sheet_id = data.get('sheet_id')
